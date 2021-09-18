@@ -46,9 +46,9 @@ app.post("/checkout", (req, res) => {
             }
         },
 		back_urls: {
-			"success": "http://localhost:3001/success",
-			"failure": "http://localhost:3001/feedback",
-			"pending": "http://localhost:3001/feedback"
+			"success": "https://adrianavr2002-mp-ecommerce.herokuapp.com/success",
+			"failure": "https://adrianavr2002-mp-ecommerce.herokuapp.com/failure",
+			"pending": "https://adrianavr2002-mp-ecommerce.herokuapp.com/pending"
 		},
 		auto_return: 'approved',
         payment_methods: {
@@ -69,28 +69,17 @@ app.post("/checkout", (req, res) => {
             console.log(`Preferência gerada: ${response.body.id}`)
 			//res.json({id :response.body.id})
 
-            // Este valor substituirá a string "<%= global.id %>" no seu HTML
-            //global.id = response.body.id;
-            //res.redirect(response.body.init_point)
-            //res.render('detail', req.query)
-
             // http://localhost:3001/detail?img=.%2Fassets%2Fl6g6.jpg&title=LG+G6&price=10000&unit=1
 
-            res.redirect('http://localhost:3001/detail?img='+response.body.items[0].picture_url+'&id='+response.body.id+'&title='+response.body.items[0].title+'&price='+response.body.items[0].unit_price+'&unit='+response.body.items[0].quantity)
+            res.redirect('https://adrianavr2002-mp-ecommerce.herokuapp.com/detail?img='+response.body.items[0].picture_url+'&id='+response.body.id+'&title='+response.body.items[0].title+'&price='+response.body.items[0].unit_price+'&unit='+response.body.items[0].quantity)
            
 		}).catch(function (error) {
 			console.log(error);
 		});
 });
 
-//app.get('/feedback', function(request, response) {
-//	 response.json({
-//		Payment: request.query.payment_id,
-//		Status: request.query.status,
-//		MerchantOrder: request.query.merchant_order_id
-//	})
-//});
+const port = process.env.PORT || 8080
 
-app.listen(8080, () => {
-  console.log("The server is now running on Port 8080");
+app.listen(port, () => {
+  console.log("The server is now running on Port "+port);
 });
