@@ -62,8 +62,6 @@
                                     
                                 </div>
 
-                                
-
                             </div>
 
                         </div>
@@ -84,7 +82,58 @@
                                     {{ unit }}
                                 </h3>
                             </div>
-                            <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>
+
+                            <div class="cho-container">
+
+                            </div>
+
+                            <!--
+                            
+                            <form action="http://localhost:8080/checkout" method="POST">
+
+                                <input type="hidden" name="title" value={{title}}>
+                                <input type="hidden" name="price" value={{price}}>
+                                <input type="hidden" name="quantity" value={{unit}}>
+                                <button type="submit" class="mercadopago-button" formmethod="post">Pague a Compra</button>
+                            
+                            <br>
+                            </form>
+
+                            <script src="https://www.mercadopago.com.br/integrations/v1/web-payment-checkout.js"
+                                        data-preference-id='<%= global.id %>'>
+                                    </script>
+
+                            -->
+
+                                    <script src="https://www.mercadopago.com/v2/security.js" view="item"></script>
+                            
+                
+                                    <script src="https://sdk.mercadopago.com/js/v2"></script>
+
+                    
+                                    <script>
+                                        // Adicione as credenciais do SDK
+                                        const mp = new MercadoPago('APP_USR-6096a634-0b35-452c-94c9-a18adb8ffb15', {
+                                                locale: 'pt-BR'
+                                        });
+
+                                            const urlParams = new URLSearchParams(window.location.search)
+
+                                            const idParam = urlParams.get('id')
+
+                                        // Inicialize o checkout
+                                        mp.checkout({
+                                            preference: {
+                                                id: idParam
+                                            },
+                                            render: {
+                                                    container: '.cho-container', // Indique o nome da class onde será exibido o botão de pagamento
+                                                    label: 'Pague a compra', // Muda o texto do botão de pagamento (opcional)
+                                            }
+                                        });
+                                    </script>
+
+
                         </div>
                     </div>
                 </div>
